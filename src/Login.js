@@ -11,25 +11,19 @@ export default function Login() {
   async function handleSubmit(e) {
     e.preventDefault();
 
-    try {
-      setError("");
-      setLoading(true);
-      localStorage.setItem("isLogin", true);
-      //   await login(usernameRef.current.value, passwordRef.current.value);
-      history.push("/");
-    } catch (err) {
-      setError(err.message);
-      setLoading(false);
-    }
-    setLoading(false);
-  }
-
-  async function handleSubmitGuest(e) {
-    e.preventDefault();
     setError("");
     setLoading(true);
-    localStorage.setItem("isLogin", true);
-    history.push("/");
+    if (
+      usernameRef.current.value == "rizky" &&
+      passwordRef.current.value == "123"
+    ) {
+      localStorage.setItem("isLogin", true);
+      localStorage.setItem("name", "Rizky");
+      history.push("/");
+    } else {
+      setError("Incorrect username & password");
+    }
+    setLoading(false);
   }
 
   return (
@@ -73,14 +67,6 @@ export default function Login() {
                   ></span>
                 )}
                 {!loading ? "Log In" : "Loading..."}
-              </button>
-              <button
-                type="button"
-                onClick={handleSubmitGuest}
-                className="btn btn-secondary w-100 mt-3"
-                disabled={loading}
-              >
-                Login As Guest
               </button>
             </form>
           </div>
